@@ -7,3 +7,7 @@ def create_user_from_db(fullname: str, email: str, hashed_password: str):
     database.session.add(user)
     database.session.commit()
 
+
+def get_user_by_email(email: str) -> User:
+    return User.query.get(email)
+

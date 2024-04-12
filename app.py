@@ -13,7 +13,7 @@ def create_app() -> Flask:
     # Подключаем компоненты
     database.init_app(app)
     migrations.init_app(app)
-    # login_manger.init_app(app)
+    login_manger.init_app(app)
     # Подключаем маршруты
     app.register_blueprint(registration_route, url_prefix="/registration")
     app.register_blueprint(auth_route, url_prefix="/auth")

@@ -1,11 +1,19 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask_login import login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .forms import AuthForm, RegistrationForm
-from .controler import create_user_from_db
+from .controler import create_user_from_db, get_user_by_email
+from .userlogin import UserLogin
+from core import login_manger
 
 
 registration = Blueprint("registration", __name__, template_folder="templates", static_folder="static")
 auth = Blueprint("auth", __name__, template_folder="templates", static_folder="static")
+
+
+@login_manger.user_loader
+def load_user(user_id):
+    return UserLogin().from_db(user_id)
 
 
 @registration.route("/", methods=["GET", "POST"])
@@ -23,6 +31,12 @@ def registry():
 
 @auth.route("/", methods=["GET", "POST"])
 def auth_get():
-    if request.method == "GET":
-        form = AuthForm()
-        return render_template("auth.html", title="Авторизация", form=form)
+    form = AuthForm()
+    if form.validate_on_submit():
+        user = get_user_by_email(form.email.data)
+        if user and check_password_hash(user.hashed_password, form.password.data):
+            ulogin = UserLogin().create(user)
+            login_user(ulogin)
+            return redirect(url_for("index"))  # TODO реализовать корректную переадресацию на существующую страницу
+        flash("Неверная пара логин/пароль", "error")
+    return render_template("auth.html", title="Авторизация", form=form)
