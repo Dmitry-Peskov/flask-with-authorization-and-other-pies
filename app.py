@@ -1,7 +1,7 @@
 from flask import Flask
 from config import config
 from core import database, migrations, login_manger, BaseModel
-from apps import auth_route, auth_models
+from apps import auth_route, auth_models, registration_route
 
 
 def create_app() -> Flask:
@@ -12,8 +12,9 @@ def create_app() -> Flask:
     # Подключаем компоненты
     database.init_app(app)
     migrations.init_app(app)
-    login_manger.init_app(app)
+    # login_manger.init_app(app)
     # Подключаем маршруты
+    app.register_blueprint(registration_route, url_prefix="/registration")
     app.register_blueprint(auth_route, url_prefix="/auth")
     return app
 
@@ -21,7 +22,5 @@ def create_app() -> Flask:
 if __name__ == "__main__":
     web_portal = create_app()
     web_portal.run(
-        host=config.app.host,
-        port=config.app.port,
         debug=config.app.debug
     )

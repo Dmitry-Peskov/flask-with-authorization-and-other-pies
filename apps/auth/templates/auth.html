@@ -1,14 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <h1 class="text-center">Авторизация</h1>
-          </div>
-          <div class="card-body">
+<div class="container">
+    <h2>Авторизация</h2>
+          <div class="container-body">
             {% with messages = get_flashed_messages() %}
               {% if messages %}
                 <div class="alert alert-danger">
@@ -20,44 +15,16 @@
                 </div>
               {% endif %}
             {% endwith %}
-            <form method="post">
-              <div class="mb-3">
-                <label for="owner_name">Сотрудник:</label>
-              <select id="owner_name" name="owner_name">
-                {% for owner in owners %}
-                <option value={{owner.id}}>{{owner.owner_name}}</option>
-                {% endfor %}
-              </select>
-              </div>
-              <div class="mb-3">
-                <label for="activity_type">Тип активности:</label>
-              <select id="activity_type" name="activity_type">
-                {% for type in types %}
-                <option value={{type.id}}>{{type.type_active}}</option>
-                {% endfor %}
-              </select>
-                <label for="time_duration">Минут:</label>
-                <input type="number" id="time_duration" name="time_duration" min="1" max="90" />
-              </div>
-              <div>
-              <label for="url">Ссылка:</label>
-                <input type="url" name="url" id="url" placeholder="https://example.com" size="65">
-              </div>
-              <div>
-              </div>
-              <div class="mb-3">
-                <label for="description" class="form-label">Проделанная работа:</label>
-                <textarea id="description" class="form-control" name="description" required></textarea>
-              </div>
-              <div>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary">Добавить</button>
-              </div>
+            <form action="" method="post">
+              <label for="email">Логин (Email):</label>
+              <br>
+              <input type="email" id="email" name="email" placeholder="Email адрес" required>
+              <br>
+              <label for="password">Пароль:</label>
+              <br>
+              <input type="password" id="password" name="password" placeholder="Пароль" required>
+              <br>
+              <input type="submit" value="Вход">
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 {% endblock %}
