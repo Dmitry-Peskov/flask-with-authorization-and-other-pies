@@ -1,7 +1,8 @@
 __all__ = [
     "BaseModel",
     "database",
-    "migrations"
+    "migrations",
+    "login_manger"
 ]
 
-from .database import BaseModel, database, migrations
+from .core import BaseModel, database, migrations, login_manger
