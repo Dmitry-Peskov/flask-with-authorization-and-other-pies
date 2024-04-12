@@ -23,5 +23,7 @@ def create_app() -> Flask:
 if __name__ == "__main__":
     web_portal = create_app()
     web_portal.run(
+        host=config.app.host,
+        port=config.app.port,
         debug=config.app.debug
     )

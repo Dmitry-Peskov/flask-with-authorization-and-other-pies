@@ -3,6 +3,8 @@ from .controler import get_user_by_email
 
 class UserLogin:
 
+    def __init__(self):
+        self.__user = None
 
     def from_db(self, user_email: str):
         self.__user = get_user_by_email(user_email)
