@@ -9,6 +9,7 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = config.database.dsn
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = config.project.secret_key
     # Подключаем компоненты
     database.init_app(app)
     migrations.init_app(app)

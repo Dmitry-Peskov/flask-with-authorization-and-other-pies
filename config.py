@@ -1,4 +1,7 @@
 from dataclasses import dataclass
+import os
+
+
 
 
 @dataclass
@@ -16,4 +19,4 @@ class config:
 
     @dataclass
     class project:
-        pass
+        secret_key: bytes = os.urandom(32)

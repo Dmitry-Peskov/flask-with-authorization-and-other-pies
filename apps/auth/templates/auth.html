@@ -16,15 +16,10 @@
               {% endif %}
             {% endwith %}
             <form action="" method="post">
-              <label for="email">Логин (Email):</label>
-              <br>
-              <input type="email" id="email" name="email" placeholder="Email адрес" required>
-              <br>
-              <label for="password">Пароль:</label>
-              <br>
-              <input type="password" id="password" name="password" placeholder="Пароль" min="8" max="12" required>
-              <br>
-              <input type="submit" value="Вход">
+               {{ form.hidden_tag() }}
+              <br> {{ form.email.label() }} <br> {{form.email() }}
+              <br> {{ form.password.label() }} <br> {{form.password() }}
+              <br> {{ form.submit() }}
             </form>
 </div>
 {% endblock %}
