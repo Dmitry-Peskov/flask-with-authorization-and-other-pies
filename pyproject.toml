@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "flask-with-authorization-and-other-pies"
+version = "0.1.0"
+description = "Знакомимся с Flask и пишем простенький WEB-сайт с авторизацией"
+authors = ["Dmitry-Peskov <dv.peskov@yandex.ru>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Flask = "^3.0.3"
+flask-sqlalchemy = "^3.1.1"
+flask-alembic = "^3.0.1"
+flask-login = "^0.6.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
