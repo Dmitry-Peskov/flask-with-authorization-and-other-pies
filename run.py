@@ -1,6 +1,7 @@
 from flask import Flask
 from config import config
 from core import database, migrations, login_manger
+from apps import auth_route
 
 
 def create_app() -> Flask:
@@ -13,7 +14,7 @@ def create_app() -> Flask:
     migrations.init_app(app)
     login_manger.init_app(app)
     # Подключаем маршруты
-    ...
+    app.register_blueprint(auth_route, url_prefix="/auth")
     return app
 
 
