@@ -1,7 +1,7 @@
 from flask import Flask
 from config import config
 from core import database, migrations, login_manager, BaseModel
-from apps import auth_route, auth_models, registration_route, activities_models
+from apps import auth_route, auth_models, registration_route, activities_models, activities_route
 
 
 def create_app() -> Flask:
@@ -17,6 +17,7 @@ def create_app() -> Flask:
     # Подключаем маршруты
     app.register_blueprint(registration_route, url_prefix="/registration")
     app.register_blueprint(auth_route, url_prefix="/auth")
+    app.register_blueprint(activities_route, url_prefix="/activities")
     return app
 
 

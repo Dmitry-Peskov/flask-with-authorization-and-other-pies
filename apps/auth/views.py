@@ -24,7 +24,7 @@ def registry():
             hashed_password = generate_password_hash(form.password.data)
             create_user_from_db(form.fullname.data, form.email.data, hashed_password)
             flash("Регистрация прошла успешно", "success")
-            return redirect(url_for('registration'))
+            return redirect(url_for('auth'))
         except Exception:
             flash("При добавлении пользователя в БД произошла ошибка", "error")
     else:
@@ -42,6 +42,6 @@ def auth_get():
         if user and check_password_hash(user.hashed_password, form.password.data):
             ulogin = UserLogin().create(user)
             login_user(ulogin)
-            return redirect(url_for("index"))  # TODO реализовать корректную переадресацию на существующую страницу
+            return redirect(url_for("activities.activities_page"))
         flash("Неверная пара логин/пароль", "error")
     return render_template("auth.html", title="Авторизация", form=form)

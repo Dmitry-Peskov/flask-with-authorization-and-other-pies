@@ -1,0 +1,32 @@
+{% extends 'base_activities.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center">Зафиксировать активность</h1>
+          </div>
+          <div class="card-body">
+            {% for cat, msg in get_flashed_messages(True) %}
+              <div class="flash {{cat}}">{{msg}}</div>
+            {% endfor %}
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+              <div class="mb-3">
+                  {{ form.type.label() }} {{ form.type() }}
+                  {{ form.duration.label() }} {{ form.duration() }}
+                <br>
+                  {{ form.url.label()}} {{ form.url() }}
+                <br>
+                {{ form.description.label() }} <br> {{form.description()}}
+                <br> {{ form.submit() }}
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
