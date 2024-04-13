@@ -4,13 +4,40 @@ from wtforms.validators import Email, Length, DataRequired
 
 
 class RegistrationForm(FlaskForm):
-    fullname = StringField("ФИО: ", validators=[DataRequired()])
-    email = StringField("Email: ", validators=[Email(), DataRequired()])
-    password = PasswordField("Пароль: ", validators=[Length(min=8, max=12), DataRequired()])
+    fullname = StringField(
+        "ФИО: ",
+        validators=[DataRequired("Поле ФИО не может быть пустым")]
+    )
+    email = StringField(
+        "Email: ",
+        validators=[
+            Email("Не корректно заполнен Email адрес"),
+            DataRequired("Поле Email не может быть пустым")
+        ]
+    )
+    password = PasswordField(
+        "Пароль: ",
+        validators=[
+            Length(min=8, max=12, message="Пароль должен иметь длинну от 8 до 12 символов"),
+            DataRequired("Поле Пароль не может быть пустым")
+        ]
+    )
     submit = SubmitField("Регистрация")
 
 
 class AuthForm(FlaskForm):
-    email = StringField("Email: ", validators=[Email(), DataRequired()])
-    password = PasswordField("Пароль: ", validators=[Length(min=8, max=12), DataRequired()])
+    email = StringField(
+        "Email: ",
+        validators=[
+            Email("Не корректно заполнен Email адрес"),
+            DataRequired("Поле Email не может быть пустым")
+        ]
+    )
+    password = PasswordField(
+        "Пароль: ",
+        validators=[
+            Length(min=8, max=12, message="Пароль должен иметь длинну от 8 до 12 символов"),
+            DataRequired("Поле Пароль не может быть пустым")
+        ]
+    )
     submit = SubmitField("Вход")
