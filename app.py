@@ -1,6 +1,6 @@
 from flask import Flask
 from config import config
-from core import database, migrations, login_manger, BaseModel
+from core import database, migrations, login_manager, BaseModel
 from apps import auth_route, auth_models, registration_route
 
 
@@ -13,7 +13,7 @@ def create_app() -> Flask:
     # Подключаем компоненты
     database.init_app(app)
     migrations.init_app(app)
-    login_manger.init_app(app)
+    login_manager.init_app(app)
     # Подключаем маршруты
     app.register_blueprint(registration_route, url_prefix="/registration")
     app.register_blueprint(auth_route, url_prefix="/auth")

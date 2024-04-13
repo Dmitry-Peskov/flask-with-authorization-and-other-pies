@@ -4,17 +4,9 @@
 <div class="container">
     <h2>Авторизация</h2>
           <div class="container-body">
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <div class="alert alert-danger">
-                  <ul>
-                    {% for message in messages %}
-                      <li>{{ message }}</li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              {% endif %}
-            {% endwith %}
+           {% for cat, msg in get_flashed_messages(True) %}
+              <div class="flash {{cat}}">{{msg}}</div>
+            {% endfor %}
             <form action="" method="post">
                {{ form.hidden_tag() }}
               <br> {{ form.email.label() }} <br> {{form.email() }}
