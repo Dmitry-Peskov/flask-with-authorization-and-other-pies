@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, SelectField, URLField, IntegerField, TextAreaField
-from wtforms.validators import DataRequired, NumberRange, URL
-from .controler import get_activities_id_and_value
+from wtforms.validators import DataRequired, NumberRange, URL, Optional
 
 
 class AddActivitiesForm(FlaskForm):
@@ -21,6 +20,7 @@ class AddActivitiesForm(FlaskForm):
         "Ссылка: ",
         validators=[
             URL(message="Введённое значение не являеться корректной ссылкой"),
+            Optional()
         ]
     )
     description = TextAreaField(

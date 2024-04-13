@@ -11,6 +11,6 @@ class BaseModel(DeclarativeBase):
 database = SQLAlchemy(model_class=BaseModel)
 migrations = Alembic()
 login_manager = LoginManager()
-login_manager.login_view = "apps.auth.views.auth_get"
+login_manager.login_view = "auth.auth_get"
 login_manager.login_message = u"Авторизуйтесь в системе, чтобы продолжить"
 login_manager.login_message_category = "info"

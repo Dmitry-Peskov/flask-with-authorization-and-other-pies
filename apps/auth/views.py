@@ -23,8 +23,8 @@ def registry():
         try:
             hashed_password = generate_password_hash(form.password.data)
             create_user_from_db(form.fullname.data, form.email.data, hashed_password)
-            flash("Регистрация прошла успешно", "success")
-            return redirect(url_for('auth'))
+            flash("Регистрация прошла успешно!\nТеперь Вы можете авторизоваться", "success")
+            return redirect(url_for('auth.auth_get'))
         except Exception:
             flash("При добавлении пользователя в БД произошла ошибка", "error")
     else:
