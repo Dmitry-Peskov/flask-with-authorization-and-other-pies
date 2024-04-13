@@ -21,3 +21,9 @@ def write_active_to_db(user_email: str, activity_type: int, duration: int, url_i
         )
     database.session.add(act)
     database.session.commit()
+
+
+def get_works_done_by_user(email: str) -> list[WorkDone]:
+    works = WorkDone.query.filter(WorkDone.user_email == email).order_by(WorkDone.completed_in.desc()).all()
+    return works if works else []
+

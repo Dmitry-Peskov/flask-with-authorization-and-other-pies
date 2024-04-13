@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_required, current_user
 
-from .controler import get_activities_id_and_value, write_active_to_db
+from .controler import get_activities_id_and_value, write_active_to_db, get_works_done_by_user
 from .forms import AddActivitiesForm
 
 activities = Blueprint("activities", __name__, template_folder="templates", static_folder="static")
@@ -12,6 +12,7 @@ activities = Blueprint("activities", __name__, template_folder="templates", stat
 def activities_page():
     form = AddActivitiesForm()
     form.type.choices = get_activities_id_and_value()
+    works_done = get_works_done_by_user(current_user.get_id())
     if form.validate_on_submit():
         try:
             write_active_to_db(current_user.get_id(), form.type.data, form.duration.data, form.url.data, form.description.data)
@@ -23,4 +24,4 @@ def activities_page():
         for t, e in form.errors.items():
             if t != "csrf_token":
                 flash(*e, "error")
-        return render_template("activities.html", title="Добавить активность", form=form)
+        return render_template("activities.html", title="Добавить активность", form=form, works=works_done)
