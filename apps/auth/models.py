@@ -1,12 +1,12 @@
 from __future__ import annotations
-
+from typing import List, TYPE_CHECKING
 from datetime import datetime
-
 from sqlalchemy import String, UniqueConstraint, Boolean, func, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import expression
-
 from core import database
+if TYPE_CHECKING:
+    from apps.activities.models import WorkDone
 
 
 class User(database.Model):
@@ -42,6 +42,8 @@ class User(database.Model):
         server_default=func.now(),
         comment="Дата и время создания пользователя"
     )
+
+    works_done: Mapped[List[WorkDone]] = relationship()
 
     __table_args__ = (UniqueConstraint("email", name="user_email_key"),)
 

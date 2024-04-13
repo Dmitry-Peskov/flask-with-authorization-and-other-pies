@@ -1,7 +1,7 @@
 from flask import Flask
 from config import config
 from core import database, migrations, login_manager, BaseModel
-from apps import auth_route, auth_models, registration_route
+from apps import auth_route, auth_models, registration_route, activities_models
 
 
 def create_app() -> Flask:
